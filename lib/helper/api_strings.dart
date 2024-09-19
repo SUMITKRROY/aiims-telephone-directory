@@ -5,4 +5,5 @@ class ApiStrings {
   static const login = '$baseurl/generate-token';
   static const getOtp = '$baseurl/generate-token-otp';
   static const helpLineNumber = '$baseurl/public/get-allhelpdesk-numbers';
+  static const getDetails = '$baseurl/admin/getTelephoneDirectory';
 }

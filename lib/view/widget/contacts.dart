@@ -105,7 +105,6 @@ class _ContactListPageState extends State<ContactListPage> {
                       backgroundColor: Colors.white,
                       child: Icon(
                         Icons.phone,
-                        color: Colors.green,
                         size: 24.sp,
                       ),
                     ),

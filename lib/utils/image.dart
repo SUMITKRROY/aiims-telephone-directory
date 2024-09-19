@@ -5,4 +5,5 @@ class ImagePath {
   static String splashBackground = "assets/images/splash.png";
   static String allBackground = "assets/images/white_back_screen.png";
   static String login = "assets/img1.png";
+  static String profile = "assets/images/profile.png";
 }

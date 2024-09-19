@@ -1,7 +1,9 @@
 import 'package:aiims_telephone_directory/component/myText.dart';
+import 'package:aiims_telephone_directory/modal_view/GETDEAILS/get_details_cubit.dart';
 import 'package:aiims_telephone_directory/view/widget/scaffold_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../modal/user_modal.dart';
@@ -51,6 +53,11 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  @override
+  void initState() {
+    BlocProvider.of<GetDetailsCubit>(context).getDetails();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final filteredUsers = _searchUsers(_searchQuery);

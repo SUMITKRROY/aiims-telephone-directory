@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/utils.dart';
+import 'otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -69,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       MyTextForm(
                         inputFormatters: [
-                          // LengthLimitingTextInputFormatter(8),
+                          LengthLimitingTextInputFormatter(8),
                         ],
                         label: "Employee",
                         prefixIcon: Icon(
@@ -95,23 +96,24 @@ class _LoginScreenState extends State<LoginScreen> {
                               Utils.showLoadingProgress(context);
                             }
                             if (state is GetOtpLoaded) {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => OTPScreen(
-                              //               empId: _empController.text.trim(),
-                              //               otp: state.otp,
-                              //             )));
                               Navigator.pop(context);
-                              Navigator.pushNamed(context, RoutePath.otpVerify,
-                                  arguments: {
-                                    'empId': _empController.text
-                                        .trim(), // replace with actual employee ID
-                                    'otp': state.otp,
-                                  });
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OTPScreen(
+                                            empId: _empController.text.trim(),
+                                            otp: state.otp,
+                                          )));
+
+                              // Navigator.pushNamed(context, RoutePath.otpVerify,
+                              //     arguments: {
+                              //       'empId': _empController.text.trim(), // replace with actual employee ID
+                              //       'otp': state.otp,
+                              //     });
                             }
-                            Navigator.pop(context);
+
                             if (state is GetOtpError) {
+                              Navigator.pop(context);
                               MySncakbar.snackbarToast(state.error);
                             }
                           },
@@ -151,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 Future<void> otpFunc() async {
   var headers = {'Content-Type': 'application/json'};
-  var data = json.encode({"employeeId": "ADMIN@123"});
+  var data = json.encode({"employeeId": "E1111111"});
   var dio = Dio();
   var response = await dio.request(
     'http://192.168.24.131:8080/generate-token-otp',

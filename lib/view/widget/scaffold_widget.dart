@@ -1,5 +1,6 @@
 import 'package:aiims_telephone_directory/component/appbar.dart';
 import 'package:aiims_telephone_directory/component/bgimage.dart';
+import 'package:aiims_telephone_directory/view/widget/drawer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -42,55 +43,7 @@ class MyScaffold extends StatelessWidget {
 
       drawer:
       showDrawer == true
-      ?Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => MyHomePage()),
-                // );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-              onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => SettingsPage()),
-                // );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.contact_mail),
-              title: Text('Contact Us'),
-              onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => ContactUsPage()),
-                // );
-              },
-            ),
-          ],
-        ),
-      )
+      ?DrawerWidget()
       :null,
       body: CustomImageContainer(
         child: body,

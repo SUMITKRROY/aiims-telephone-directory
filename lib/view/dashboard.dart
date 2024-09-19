@@ -19,8 +19,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-        showLogin: true,
-        //showDrawer: false,
+        showLogin: false,
+        showDrawer: true,
         body: CustomImageContainer(
           child: ContactListPage(),
         ));
