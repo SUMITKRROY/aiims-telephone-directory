@@ -8,8 +8,11 @@ ThemeData lightMode = ThemeData(
     surfaceTintColor: Colors.transparent,
     elevation: 0,
   ),
-  buttonTheme: const ButtonThemeData(
-    textTheme: ButtonTextTheme.accent, // Button text color
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white), // Text color
+      backgroundColor: WidgetStateProperty.all<Color>(ColorsData.primaryColor), // Button background color
+    ),
   ),
   textTheme: const TextTheme(
     titleLarge: TextStyle(
@@ -41,6 +44,7 @@ ThemeData lightMode = ThemeData(
     color: ColorsData.greenTheams, // Set the icon color to green
   ),
 );
+
 
 
 

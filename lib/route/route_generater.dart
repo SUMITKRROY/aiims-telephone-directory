@@ -2,6 +2,8 @@ import 'package:aiims_telephone_directory/route/pageroute.dart';
 import 'package:aiims_telephone_directory/view/login_screen.dart';
 import 'package:aiims_telephone_directory/view/otp_screen.dart';
 import 'package:flutter/material.dart';
+import '../view/login/employe_login/guest_user_login.dart';
+import '../view/login_type.dart';
 import '../view/splash_screen.dart';
 import '../view/dashboard.dart';
 
@@ -18,7 +20,18 @@ class MyRoutes {
       case RoutePath.welcome:
         return MaterialPageRoute(builder: (_) => const DashBoardScreen());
       //
-      ///Login screen
+      ///Login type screen
+      case RoutePath.loginTypeScreen:
+        return MaterialPageRoute(
+          builder: (_) => LoginTypeScreen(),
+        );
+
+        ///Guest user screen
+      case RoutePath.guestLoginScreen:
+        return MaterialPageRoute(
+          builder: (_) => GuestLoginScreen(),
+        );
+        ///Login screen
       case RoutePath.login:
         return MaterialPageRoute(
           builder: (_) => LoginScreen(),

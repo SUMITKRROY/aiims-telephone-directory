@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../modal/helpline_number.dart'; // For rootBundle
 
 class ContactListPage extends StatefulWidget {
@@ -14,6 +13,7 @@ class ContactListPage extends StatefulWidget {
 
 class _ContactListPageState extends State<ContactListPage> {
   List<HelplineNumberModal> contacts = [];
+  List<HelplineNumberModal> pinnedContacts = [];
 
   @override
   void initState() {
@@ -25,7 +25,7 @@ class _ContactListPageState extends State<ContactListPage> {
     String jsonString = await rootBundle.loadString('assets/contacts.json');
     List<dynamic> jsonList = json.decode(jsonString);
     List<HelplineNumberModal> loadedContacts =
-        jsonList.map((json) => HelplineNumberModal.fromJson(json)).toList();
+    jsonList.map((json) => HelplineNumberModal.fromJson(json)).toList();
 
     setState(() {
       contacts = loadedContacts;
@@ -66,11 +66,28 @@ class _ContactListPageState extends State<ContactListPage> {
     await launch(launchUri.toString());
   }
 
+  void pinContact(HelplineNumberModal contact) {
+    setState(() {
+      if (pinnedContacts.contains(contact)) {
+        // Unpin the contact if it's already pinned
+        pinnedContacts.remove(contact);
+      } else {
+        // Pin the contact if it's not pinned
+        pinnedContacts.add(contact);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Combine pinned contacts with unpinned contacts
+    List<HelplineNumberModal> displayedContacts = [
+      ...pinnedContacts,
+      ...contacts.where((c) => !pinnedContacts.contains(c))
+    ];
+
     return Column(
       children: [
-        // SizedBox(height: 5.h),
         Container(
           padding: EdgeInsets.symmetric(vertical: 5.h),
           width: double.maxFinite,
@@ -86,11 +103,14 @@ class _ContactListPageState extends State<ContactListPage> {
         Expanded(
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
-            itemCount: contacts.length,
+            itemCount: displayedContacts.length,
             itemBuilder: (context, index) {
-              HelplineNumberModal contact = contacts[index];
+              HelplineNumberModal contact = displayedContacts[index];
               return ListTile(
                 tileColor: Colors.white,
+                leading: pinnedContacts.contains(contact)
+                    ? Icon(Icons.push_pin, color: Colors.green)
+                    : null, // Show pin icon only for pinned contacts
                 title: Text(contact.name),
                 subtitle: Text(contact.phone),
                 trailing: IconButton(
@@ -110,6 +130,9 @@ class _ContactListPageState extends State<ContactListPage> {
                     ),
                   ),
                 ),
+                onLongPress: () {
+                  pinContact(contact); // Pin or unpin the contact
+                },
                 onTap: () {
                   showContactModal(context, contact);
                 },

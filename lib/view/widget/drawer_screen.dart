@@ -309,7 +309,7 @@ class DrawerWidget extends StatelessWidget {
                   ],
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, RoutePath.login);
+                  Navigator.pushNamed(context, RoutePath.loginTypeScreen);
                   // BlocProvider.of<LogoutCubit>(context).userLogOut();
                 },
               ),
